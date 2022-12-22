@@ -6,7 +6,7 @@ index = async (req, res) => {
     });
 }
 
-// Index
+// Chat
 chat = async (req, res) => {
     return res.render('chat', {
         layout: 'layouts/main',
