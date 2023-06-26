@@ -42,7 +42,13 @@ socket.on('typing', (data) => {
         type.classList.remove("d-none");
     }
 
-    console.log(data);
+    // Setting Time Out To remove writing
+    setTimeout(() => {
+        // Removing class
+        type.classList.add("d-none"); 
+        console.log("Stop Ngetik");
+    }, 3000);
+
 });
 
 // When Someoine disconnect
