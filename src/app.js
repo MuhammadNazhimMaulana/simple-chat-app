@@ -2,6 +2,9 @@ const express = require('express');
 const path = require('path');
 const expressLayouts = require('express-ejs-layouts');
 
+// FS
+const { writeFile } = require("fs");
+
 // App Config
 const app = express();
 
@@ -41,6 +44,15 @@ io.on('connection', (socket) => {
     //When Someone Disconnect
     socket.on('disconnect', () => {
         io.emit('offline', 'Someone is offline');
+    });
+
+    // On Upload
+    socket.on("upload", (file, callback) => {
+   
+        // save the content to the disk, for example
+        writeFile("src/public/uploads/test.txt", file, (err) => {
+          callback({ message: err ? 'failure' : "success" });
+        });
     });
 });
 

@@ -62,3 +62,10 @@ socket.on('offline', (msg) => {
     messages.appendChild(item);
     window.scrollTo(0, document.body.scrollHeight);
 });
+
+// Upload Image
+let upload = (files) => {
+    socket.emit("upload", files[0], (status) => {
+      console.log(status);
+    });
+}
