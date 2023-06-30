@@ -65,7 +65,16 @@ socket.on('offline', (msg) => {
 
 // Upload Image
 let upload = (files) => {
+
     socket.emit("upload", files[0], (status) => {
-      console.log(status);
+
+        // Send Message
+        if (status) {
+          // Send to Back end
+          socket.emit('incoming chat', status.message);
+      
+          // Empty Input
+          input.value = '';
+        }
     });
 }

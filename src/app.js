@@ -48,10 +48,10 @@ io.on('connection', (socket) => {
 
     // On Upload
     socket.on("upload", (file, callback) => {
-   
+
         // save the content to the disk, for example
-        writeFile("src/public/uploads/test.txt", file, (err) => {
-          callback({ message: err ? 'failure' : "success" });
+        writeFile("src/public/uploads/image.png", file, (err) => {
+          callback({ message: err ? 'failure' : "Picture Uploaded" });
         });
     });
 });
