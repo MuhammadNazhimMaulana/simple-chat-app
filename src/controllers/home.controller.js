@@ -2,7 +2,8 @@
 index = async (req, res) => {
     return res.render('home', {
         layout: 'layouts/main',
-        title: 'Halaman Home'
+        title: 'Halaman Home', 
+        sign: 'Home'
     });
 }
 
@@ -10,7 +11,8 @@ index = async (req, res) => {
 chat = async (req, res) => {
     return res.render('chat', {
         layout: 'layouts/main',
-        title: 'Halaman Chat'
+        title: 'Halaman Chat',
+        sign: 'Chat'
     });
 }
 
