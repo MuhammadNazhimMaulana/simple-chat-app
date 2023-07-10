@@ -29,8 +29,30 @@ socket.on('incoming chat', (msg) => {
 });
 
 //Emit typing
-form.addEventListener("keypress", () => {
-    socket.emit('typing')
+form.addEventListener("keydown", (e) => {
+    // Key
+    key = e.which;
+
+    // Verify that the key entered is not a special key
+    if (key == 20 /* Caps lock */
+     || key == 16 /* Shift */
+     || key == 9 /* Tab */
+     || key == 27 /* Escape Key */
+     || key == 17 /* Control Key */
+     || key == 91 /* Windows Command Key */
+     || key == 19 /* Pause Break */
+     || key == 18 /* Alt Key */
+     || key == 93 /* Right Click Point Key */
+     || ( key >= 35 && key <= 40 ) /* Home, End, Arrow Keys */
+     || key == 45 /* Insert Key */
+     || ( key >= 33 && key <= 34 ) /*Page Down, Page Up */
+     || (key >= 112 && key <= 123) /* F1 - F12 */
+     || (key >= 144 && key <= 145 )) { /* Num Lock, Scroll Lock */
+        return false;
+    }
+    else {
+        socket.emit('typing')
+    }
 });
 
 //Listen on typing
@@ -40,15 +62,26 @@ socket.on('typing', (data) => {
     {
         // Removing class
         type.classList.remove("d-none");
+    }else if(input.value == '')
+    {
+        // Add d-none
+        type.classList.add("d-none");  
     }
 
+});
+
+// Wait Whether user stop typing or not
+form.addEventListener('keyup', (e) => {
+    let timer;
+
+    // Clear timer
+    clearTimeout(timer);
+    
     // Setting Time Out To remove writing
-    setTimeout(() => {
+    timer = setTimeout(() => {
         // Removing class
         type.classList.add("d-none"); 
-        console.log("Stop Ngetik");
-    }, 3000);
-
+    }, 500);
 });
 
 // When Someoine disconnect
